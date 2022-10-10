@@ -8,7 +8,7 @@ ctrl.register = async (req, res) => {
     try {
         const { username, email, password } = req.body
 
-        if(username&&email&&password){
+        if(!username&&!email&&!password){
             res.status(400).json({
                 msg: 'Try again'
             })
@@ -71,5 +71,6 @@ ctrl.login = async (req, res)=>{
         })
     }
 }
+
 
 module.exports = ctrl;

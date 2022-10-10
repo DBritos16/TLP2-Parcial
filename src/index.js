@@ -17,6 +17,7 @@ connectDB();
 
 //routes
 app.use(require('./routes/users.routes'));
+app.use(require('./routes/tasks.routes'));
 
 
 //PORT
