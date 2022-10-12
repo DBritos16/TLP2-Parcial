@@ -14,6 +14,40 @@ ctrl.getTask = async (req, res) => {
 
         const getTask = await Task.find({ userId: uid })
 
+        if(!getTask){
+            res.status(404).json({
+                msg: 'Task not found'
+            })
+        }
+
+        res.json(getTask);
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            msg: 'An error has ocurred'
+        })
+    }
+}
+
+ctrl.getSpecificTask = async (req, res)=>{
+    try {
+        const id = req.params.id;
+
+        if(!id){
+            res.status(404).json({
+                msg: 'No ID received'
+            })
+        }
+
+        const getTask = await Task.findById(id);
+
+        if(!getTask){
+            res.status(404).json({
+                msg: 'Task not found'
+            })
+        }
+
         res.json(getTask);
 
     } catch (error) {
