@@ -79,6 +79,23 @@ ctrl.login = async (req, res)=>{
     }
 }
 
+ctrl.getUser = async (req, res)=>{
+    try {
+        const user = await User.findById(req.user._id, {password: 0});
+
+        res.json({
+            msg: 'User profile',
+            user
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            msg: 'An error has ocurred'
+        })
+    }
+}
+
 ctrl.putUser = async (req, res)=>{
     try {
         const {username, email, password} = req.body
