@@ -12,6 +12,10 @@ const NewUser = new Schema({
     password: {
         type: String,
         require: true
+    },
+    isActive:{
+        type: Boolean,
+        default: true
     }
 
 }, {versionKey: false, timestamps: true});
