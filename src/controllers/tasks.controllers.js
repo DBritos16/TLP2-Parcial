@@ -63,4 +63,69 @@ ctrl.postTask = async (req, res) => {
 
 }
 
+ctrl.putTask = async (req, res)=>{
+    try {
+        const {title, description} = req.body;
+        const id = req.params.id;
+
+        if(!id){
+            res.status(404).json({
+                msg: 'No ID received'
+            })
+        }
+
+        const updateTask = await Task.updateOne({_id: id, userId: req.user._id},{
+            $set: {title, description}
+        });
+
+        if(!updateTask){
+            res.status(400).json({
+                msg: 'Error to update task'
+            })
+        };
+
+        res.json({
+            msg: 'Task has been update'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            msg: 'An error has ocurred'
+        })
+    }
+}
+
+ctrl.deleteTask = async (req, res)=>{
+    try {
+        const id = req.params.id
+
+        if(!id){
+            res.status(404).json({
+                msg: 'No ID received'
+            })
+        }
+
+        const deleteTask = await Task.deleteOne({_id: id, userId: req.user._id});
+
+        if(!deleteTask){
+            res.status(400).json({
+                msg: 'Error to delete task'
+            });
+        }
+
+        res.json({
+            msg: 'Task has been delete.'
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            msg: 'An error has ocurred'
+        })
+    }
+}
+
+
 module.exports = ctrl;
