@@ -1,14 +1,15 @@
 const router = require('express').Router();
 
-const { register, login } = require('../controllers/users.controllers');
+const { register, login, putUser, deleteUser } = require('../controllers/users.controllers');
+const validarJWT = require('../middlewares/validarJWT');
 
 
 router.post('/register', register);
 
 router.post('/login', login);
 
-router.put('/user/edit');
+router.put('/user/edit', validarJWT, putUser);
 
-router.delete('/user/delete');
+router.put('/user/delete', validarJWT, deleteUser);
 
 module.exports = router;

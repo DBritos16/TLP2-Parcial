@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.models');
-const { findById } = require('../models/user.models');
 
 const validarJWT = async (req, res, next) => {
 
@@ -20,6 +19,12 @@ const validarJWT = async (req, res, next) => {
         if (!user) {
             res.status(404).json({
                 msg: 'No user found'
+            });
+        }
+
+        if (!user.isActive) {
+            res.status(400).json({
+                msg: 'User is inactive'
             });
         }
 
