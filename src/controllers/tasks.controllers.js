@@ -108,9 +108,7 @@ ctrl.putTask = async (req, res)=>{
             })
         }
 
-        const updateTask = await Task.updateOne({_id: id, userId: req.user._id},{
-            $set: {title, description}
-        });
+        const updateTask = await Task.updateOne({_id: id, userId: req.user._id},{title, description});
 
         if(!updateTask){
             res.status(400).json({
@@ -121,6 +119,36 @@ ctrl.putTask = async (req, res)=>{
         res.json({
             msg: 'Task has been update'
         });
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            msg: 'An error has ocurred'
+        })
+    }
+}
+
+ctrl.completeTask = async(req, res)=>{
+    try {
+        const id = req.params.id
+
+        if(!id){
+            res.status(400).json({
+                msg: 'No id received'
+            })
+        }
+
+        const completeTask = await Task.updateOne({_id: id, userId: req.user.id},{isDone: true});
+
+        if(!completeTask){
+            res.status(400).json({
+                msg: 'Error to complete task'
+            })
+        }
+
+        res.json({
+            msg: 'Task complete'
+        })
 
     } catch (error) {
         console.log(error);

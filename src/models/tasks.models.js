@@ -9,9 +9,9 @@ const NewTask = new Schema({
         type: String,
         required: true
     },
-    isActive: {
+    isDone: {
         type: Boolean,
-        default: true
+        default: false
     },
     userId: {
         type: Schema.Types.ObjectId, ref: 'Users'
