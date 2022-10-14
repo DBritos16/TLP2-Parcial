@@ -16,3 +16,9 @@ npm i
 npm run dev
 ```
 
+
+#### En el .env se encuentra lo siguiente
+
+- PORT=3000
+- URI_MONGODB=mongodb+srv://elmo:12345@diego.g8erfpi.mongodb.net/TLP2?retryWrites=true&w=majority
+- SECRET=mysecret-tlp2-parcial
